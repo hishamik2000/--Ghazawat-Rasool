@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غزوات الرسول محمد صلى الله عليه وسلم</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f4e6;
+            color: #333;
+            padding: 20px;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #4a6741;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .author {
+            font-size: 1.2rem;
+            color: #f0f0f0;
+            margin-bottom: 10px;
+        }
+        
+        .intro {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            background-color: #f9f5eb;
+            padding: 15px;
+            border-radius: 10px;
+            border-right: 5px solid #4a6741;
+        }
+        
+        .search-container {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
+        .search-input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 2px solid #c5d8c3;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-btn, .clear-btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn {
+            background-color: #4a6741;
+            color: white;
+        }
+        
+        .clear-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .search-btn:hover, .clear-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ghazawat-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .ghazwa {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .ghazwa:hover {
+            transform: translateY(-5px);
+        }
+        
+        .ghazwa-header {
+            padding: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .ghazwa-content {
+            background-color: white;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .ghazwa.active .ghazwa-content {
+            padding: 15px;
+            max-height: 800px;
+        }
+        
+        .ghazwa-content h3 {
+            margin-bottom: 10px;
+            color: #4a6741;
+        }
+        
+        .ghazwa-content ul {
+            padding-right: 20px;
+        }
+        
+        .ghazwa-content li {
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+        
+        .arrow {
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(-45deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .ghazwa.active .arrow {
+            transform: rotate(45deg);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2rem;
+            color: #555;
+            background-color: #f9f5eb;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        /* للألوان المختلفة للغزوات */
+        .color-1 { background-color: #7b9d6f; }
+        .color-2 { background-color: #598381; }
+        .color-3 { background-color: #5e8c61; }
+        .color-4 { background-color: #6b7f5d; }
+        .color-5 { background-color: #9b9b7a; }
+        .color-6 { background-color: #757f68; }
+        .color-7 { background-color: #8a9a5b; }
+        .color-8 { background-color: #7d9b76; }
+        .color-9 { background-color: #516b48; }
+        .color-10 { background-color: #799351; }
+        .color-11 { background-color: #687c49; }
+        .color-12 { background-color: #73937e; }
+        .color-13 { background-color: #5b8266; }
+        .color-14 { background-color: #6a8c69; }
+        .color-15 { background-color: #829079; }
+        .color-16 { background-color: #617c58; }
+        .color-17 { background-color: #768b60; }
+        .color-18 { background-color: #5d7247; }
+        .color-19 { background-color: #4a6e4b; }
+        .color-20 { background-color: #677a49; }
+        .color-21 { background-color: #829356; }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #4a6741;
+            color: white;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .ghazawat-list {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .author {
+                font-size: 1rem;
+            }
+        }
+        
+        /* صورة مزخرفة في الخلفية */
+        .decorative-bg {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='rgba(255,255,255,0.1)' d='M50 0 L100 50 L50 100 L0 50 Z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.3;
+        }
+        
+        .bg-1 {
+            top: 10px;
+            left: 10px;
+            transform: rotate(30deg);
+        }
+        
+        .bg-2 {
+            bottom: 10px;
+            right: 10px;
+            transform: rotate(-30deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="decorative-bg bg-1"></div>
+            <div class="decorative-bg bg-2"></div>
+            <h1>غزوات الرسول محمد صلى الله عليه وسلم</h1>
+            <p class="author">إعداد: هشام الخطيب</p>
+        </header>
+        
+        <div class="intro">
+            <p>غزوات الرسول محمد صلى الله عليه وسلم هي المعارك التي قادها الرسول بنفسه. هذا التطبيق يقدم لكم أهم هذه الغزوات ونتائجها بأسلوب مبسط يناسب الأطفال من سن 10-12 سنة.</p>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="ابحث عن غزوة...">
+            <button class="search-btn">بحث</button>
+            <button class="clear-btn">مسح</button>
+        </div>
+        
+        <div class="ghazawat-list"></div>
+        
+        <div class="no-results">لم يتم العثور على نتائج للبحث</div>
+        
+        <footer>
+            <p>تطبيق تعليمي للأطفال - حقوق النشر © 2025</p>
+        </footer>
+    </div>
+    
+    <script>
+        // بيانات الغزوات
+        const ghazawatData = [
+            {
+                name: "غزوة بدر الكبرى",
+                date: "2 هـ / 624 م",
+                reason: "اعتراض قافلة قريش التجارية",
+                result: "انتصار المسلمين، مقتل 70 من المشركين وأسر 70 آخرين",
+                importance: "أول انتصار كبير للمسلمين، رفع معنوياتهم وتعزيز مكانتهم"
+            },
+            {
+                name: "غزوة أحد",
+                date: "3 هـ / 625 م",
+                reason: "انتقام قريش لهزيمتها في بدر",
+                result: "هزيمة المسلمين بعد مخالفة الرماة لأوامر الرسول",
+                importance: "درس في طاعة القيادة وعدم الاغترار بالنصر"
+            },
+            {
+                name: "غزوة الخندق (الأحزاب)",
+                date: "5 هـ / 627 م",
+                reason: "تحالف قبائل قريش والقبائل المجاورة ضد المسلمين",
+                result: "فشل الحصار بعد حفر المسلمين للخندق حول المدينة",
+                importance: "أظهرت أهمية التخطيط والاستراتيجية العسكرية"
+            },
+            {
+                name: "غزوة بني قريظة",
+                date: "5 هـ / 627 م",
+                reason: "نقض بني قريظة للعهد والتحالف مع الأحزاب",
+                result: "استسلام بني قريظة والحكم عليهم حسب شريعتهم",
+                importance: "إنهاء الخيانة الداخلية في المدينة"
+            },
+            {
+                name: "صلح الحديبية",
+                date: "6 هـ / 628 م",
+                reason: "رغبة المسلمين في أداء العمرة",
+                result: "عقد هدنة لمدة 10 سنوات مع قريش",
+                importance: "فتح المجال أمام نشر الدعوة الإسلامية سلمياً"
+            },
+            {
+                name: "غزوة خيبر",
+                date: "7 هـ / 628 م",
+                reason: "تحريض يهود خيبر القبائل ضد المسلمين",
+                result: "فتح حصون خيبر وإقرار اليهود على أراضيهم مقابل الجزية",
+                importance: "تأمين الجبهة الشمالية للمدينة المنورة"
+            },
+            {
+                name: "فتح مكة",
+                date: "8 هـ / 630 م",
+                reason: "نقض قريش للعهد بمهاجمة حلفاء المسلمين",
+                result: "دخول مكة سلماً وتحطيم الأصنام وعفو عام عن أهل مكة",
+                importance: "نهاية وثنية العرب وتحول مكة إلى مركز للإسلام"
+            },
+            {
+                name: "غزوة حنين",
+                date: "8 هـ / 630 م",
+                reason: "تحالف قبائل هوازن وثقيف ضد المسلمين",
+                result: "انتصار المسلمين بعد تراجع أولي",
+                importance: "درس في عدم الاعتماد على الكثرة وأهمية الثبات"
+            },
+            {
+                name: "غزوة تبوك",
+                date: "9 هـ / 630 م",
+                reason: "التصدي لتهديد الروم للدولة الإسلامية",
+                result: "انسحاب الروم وعقد معاهدات مع القبائل على الحدود",
+                importance: "إظهار قوة الدولة الإسلامية وتوسيع نفوذها"
+            },
+            {
+                name: "غزوة بواط",
+                date: "2 هـ",
+                reason: "اعتراض قافلة لقريش",
+                result: "عودة المسلمين دون قتال بعد عدم العثور على القافلة",
+                importance: "من أوائل غزوات المسلمين"
+            },
+            {
+                name: "غزوة العشيرة",
+                date: "2 هـ",
+                reason: "اعتراض قافلة أبي سفيان التجارية",
+                result: "لم تحدث مواجهة، وعقد معاهدات سلام مع بعض القبائل في المنطقة",
+                importance: "تعزيز العلاقات مع القبائل المجاورة"
+            },
+            {
+                name: "غزوة بني سليم",
+                date: "2 هـ",
+                reason: "تأديب بني سليم بعد تجمعهم لمهاجمة المدينة",
+                result: "انسحاب بني سليم قبل وصول المسلمين",
+                importance: "إظهار قوة المسلمين وجاهزيتهم للدفاع"
+            },
+            {
+                name: "غزوة السويق",
+                date: "2 هـ",
+                reason: "رد على غارة أبي سفيان على ضواحي المدينة",
+                result: "فرار أبي سفيان ومن معه",
+                importance: "حماية المدينة من الغارات"
+            },
+            {
+                name: "غزوة ذي أمر",
+                date: "3 هـ",
+                reason: "التصدي لتجمع قبائل بني ثعلبة وبني محارب",
+                result: "تفرق القبائل وانسحابها",
+                importance: "تأمين محيط المدينة المنورة"
+            },
+            {
+                name: "غزوة بحران",
+                date: "3 هـ",
+                reason: "مواجهة تجمع لبني سليم",
+                result: "عودة المسلمين دون قتال",
+                importance: "استكشاف المنطقة وإظهار قوة المسلمين"
+            },
+            {
+                name: "غزوة بني النضير",
+                date: "4 هـ",
+                reason: "محاولة بني النضير اغتيال الرسول صلى الله عليه وسلم",
+                result: "إجلاء بني النضير عن المدينة بعد حصارهم",
+                importance: "التخلص من خطر داخلي للدولة الإسلامية"
+            },
+            {
+                name: "غزوة ذات الرقاع",
+                date: "4 هـ",
+                reason: "التصدي لتهديد بعض القبائل النجدية",
+                result: "انسحاب القبائل وعودة المسلمين",
+                importance: "أول صلاة خوف في الإسلام"
+            },
+            {
+                name: "غزوة دومة الجندل",
+                date: "5 هـ",
+                reason: "تأمين طرق التجارة والتصدي لقطاع الطرق",
+                result: "فرار القبائل المهددة قبل وصول المسلمين",
+                importance: "توسيع نفوذ الدولة الإسلامية شمالاً"
+            },
+            {
+                name: "غزوة بني المصطلق",
+                date: "6 هـ",
+                reason: "استعداد بني المصطلق لمهاجمة المدينة",
+                result: "انتصار المسلمين وأسر عدد من القبيلة",
+                importance: "القضاء على خطر محتمل للمدينة"
+            },
+            {
+                name: "غزوة مؤتة",
+                date: "8 هـ",
+                reason: "مقتل رسول النبي إلى أمير بصرى",
+                result: "استشهاد قادة المسلمين الثلاثة وانسحاب الجيش الإسلامي بقيادة خالد بن الوليد",
+                importance: "أول مواجهة مع الروم البيزنطيين"
+            },
+            {
+                name: "غزوة الطائف",
+                date: "8 هـ",
+                reason: "استكمال القضاء على مقاومة ثقيف بعد حنين",
+                result: "حصار الطائف ثم رفع الحصار ودخول أهلها الإسلام لاحقاً",
+                importance: "توسيع رقعة الإسلام وإنهاء مقاومة ثقيف"
+            }
+        ];
+        
+        // الدالة الرئيسية لإنشاء عناصر الغزوات
+        function createGhazawatElements(data) {
+            const container = document.querySelector('.ghazawat-list');
+            container.innerHTML = '';
+            
+            data.forEach((ghazwa, index) => {
+                // اختيار لون للغزوة (مؤشر اللون يتناوب بين الألوان المتاحة)
+                const colorIndex = (index % 21) + 1;
+                const colorClass = `color-${colorIndex}`;
+                
+                // إنشاء عنصر الغزوة
+                const ghazwaElement = document.createElement('div');
+                ghazwaElement.className = 'ghazwa';
+                
+                // إنشاء ترويسة الغزوة (العنوان)
+                const headerElement = document.createElement('div');
+                headerElement.className = `ghazwa-header ${colorClass}`;
+                headerElement.innerHTML = `${ghazwa.name} <span class="arrow"></span>`;
+                
+                // إنشاء محتوى الغزوة
+                const contentElement = document.createElement('div');
+                contentElement.className = 'ghazwa-content';
+                contentElement.innerHTML = `
+                    <h3>تاريخ الغزوة: ${ghazwa.date}</h3>
+                    <ul>
+                        <li><strong>السبب:</strong> ${ghazwa.reason}</li>
+                        <li><strong>النتيجة:</strong> ${ghazwa.result}</li>
+                        <li><strong>الأهمية:</strong> ${ghazwa.importance}</li>
+                    </ul>
+                `;
+                
+                // إضافة العناصر إلى الغزوة
+                ghazwaElement.appendChild(headerElement);
+                ghazwaElement.appendChild(contentElement);
+                
+                // إضافة الغزوة إلى القائمة
+                container.appendChild(ghazwaElement);
+                
+                // إضافة حدث النقر لإظهار/إخفاء محتوى الغزوة
+                headerElement.addEventListener('click', () => {
+                    ghazwaElement.classList.toggle('active');
+                });
+            });
+        }
+        
+        // إظهار كل الغزوات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            createGhazawatElements(ghazawatData);
+            
+            // إضافة وظيفة البحث
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            const clearBtn = document.querySelector('.clear-btn');
+            const noResults = document.querySelector('.no-results');
+            
+            // البحث عن الغزوات
+            function searchGhazawat() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                
+                if (searchTerm === '') {
+                    createGhazawatElements(ghazawatData);
+                    noResults.style.display = 'none';
+                    return;
+                }
+                
+                const filteredData = ghazawatData.filter(ghazwa => {
+                    return ghazwa.name.toLowerCase().includes(searchTerm) ||
+                           ghazwa.date.toLowerCase().includes(searchTerm) ||
+                           ghazwa.reason.toLowerCase().includes(searchTerm) ||
+                           ghazwa.result.toLowerCase().includes(searchTerm) ||
+                           ghazwa.importance.toLowerCase().includes(searchTerm);
+                });
+                
+                if (filteredData.length === 0) {
+                    document.querySelector('.ghazawat-list').innerHTML = '';
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                    createGhazawatElements(filteredData);
+                }
+            }
+            
+            // تفعيل زر البحث
+            searchBtn.addEventListener('click', searchGhazawat);
+            
+            // البحث عند الضغط على زر Enter
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    searchGhazawat();
+                }
+            });
+            
+            // تفعيل زر المسح
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                createGhazawatElements(ghazawatData);
+                noResults.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
